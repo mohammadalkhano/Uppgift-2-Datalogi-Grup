@@ -22,10 +22,10 @@ siffra som symboliserar tidsåtgången det tar att ta sig mellan de två noderna
 Programmet skall sedan klara av följande punkter även om nätverket eller tidsåtgången mellan noder
 skulle ändras:
  <ul>
-<li> Räkna ut kortaste vägen mellan två punkter som användaren väljer.<li/>
-<li> Räkna ut kortaste vägen mellan två punkter via ett delmål.<li/>
+<li> Räkna ut kortaste vägen mellan två punkter som användaren väljer.
+<li> Räkna ut kortaste vägen mellan två punkter via ett delmål.
 <li> Programmet klarar av samtliga typer av input. Vid inkorrekt input skall användaren
-meddelas.<li/>
+meddelas.
 <li> Ge användaren feedback på resultat av frågor samt uträkningen.<li/>
 <li> Komplexiteten för minst två funktioner skall skrivas som kommentarer i koden.<li/>
 <li> Rekursion skall vara en del av programmet.<li/>

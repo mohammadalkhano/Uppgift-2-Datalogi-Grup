@@ -33,11 +33,17 @@ namespace Route_City
                     {0,0,12,3,0,0,13,0,0,7},
                     {0,0,0,0,0,0,8,9,7,0}
             };
+
         // The output array. dist[i] will hold the shortest distance from src to i
 
 
         // Number of vertices
-        static int vertices = 10;
+
+
+        //static int vertices = 10;
+        //static int vertices = Convert.ToChar(Console.ReadLine());
+        static int vertices = int.Parse(Console.ReadLine());
+
         static int[] shortestPaht = new int[vertices];
         // sptSet[i] will true if vertex
         // i is included in shortest path
@@ -67,7 +73,7 @@ namespace Route_City
         // the constructed distance array
         static void printShortestPath(int[] dist, int n)
         {
-            Console.Write("Stops	 Distance from A to  E\n");
+            Console.Write("Stops	 Distance from "+ vertices +" to  A\n");
             for (int i = 0; i < vertices; i++)
                 Console.Write(verticesName[i] + " \t\t " + dist[i] + "\n");
         }

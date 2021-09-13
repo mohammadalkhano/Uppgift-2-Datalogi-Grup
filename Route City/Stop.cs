@@ -43,6 +43,7 @@ namespace Route_City
         //static int vertices = 10;
         //static int vertices = Convert.ToChar(Console.ReadLine());
         static int vertices = int.Parse(Console.ReadLine());
+        //char vertices = Convert.ToChar(vertices_int);
 
         static int[] shortestPaht = new int[vertices];
         // sptSet[i] will true if vertex

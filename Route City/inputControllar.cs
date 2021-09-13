@@ -8,18 +8,26 @@ namespace Route_City
     {
     class inputControllar
         {
+        private static void bussLogo()
+            {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\t\t  ____________________________________________________________ ");
+            Console.WriteLine("\t\t |     |      |     |     |     |     |     |     |     |     |");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\t\t |  () |      |  () |  () |     |  () |  () |     |  () |  () |");
+            Console.WriteLine("\t\t |_<  >|______|__||_|__||_|_____|__||_|__||_|_____|__||_|__||_|");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("\t\t |____________________________________________________________|");
 
+            Console.WriteLine("\t\t |       . ' .              Buss            . ' .             |");
+            Console.WriteLine("\t\t (______'  o  '____________________________'  o  '____________)");
+            Console.WriteLine("\t\t         ' . '                              ' . '              ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("<<<=============================================================================================<<<");
+            }
         public static void buss()
             {
-            Console.WriteLine("\t\t\t  _______________________________________________");
-            Console.WriteLine("\t\t\t |     |                                         |");
-            Console.WriteLine("\t\t\t |  () |  () |  () |  () |  () |  () |  ()|   () |");
-            Console.WriteLine("\t\t\t |_<||_|__||_|__||_|__||_|__||_|__||_|__||_|__||_|");
-            Console.WriteLine("\t\t\t |     . ' .            Buss         . ' .       |");
-            Console.WriteLine("\t\t\t (____'     '_______________________'     '______)");
-            Console.WriteLine("\t\t\t       ' . '                         ' . '         ");
-            Console.WriteLine("===================================================================================================");
-
+            bussLogo();
             var loop = true;
             while (loop)
                 {
@@ -27,8 +35,6 @@ namespace Route_City
                 Console.WriteLine("För att går vidare [V]");
 
                 var userInput = Console.ReadLine().ToLower();
-
-
                 if (userInput == "s")
                     {
                     loop = false;
@@ -43,15 +49,13 @@ namespace Route_City
                     }
                 }
             }
-
         private static void chooseStations()
             {
-            Console.WriteLine("Hållplatser som bussen kör till: A\t B\t C\t D\t E\t F\t G\t H\t I\t J\n ");
+            Console.WriteLine("Hållplatser som bussen kör till\n A\t B\t C\t D\t E\t F\t G\t H\t I\t J\n ");
             Console.Write("Från hållplats : ");
             var start = Console.ReadLine().ToLower();
             Console.Write("Till hållplats : ");
             var end = Console.ReadLine().ToLower();
-
             }
         }
     }

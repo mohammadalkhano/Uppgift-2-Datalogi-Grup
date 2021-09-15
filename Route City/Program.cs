@@ -2,6 +2,8 @@
 
 namespace Route_City
 {
+    //The used source to represent the data and implement Dijkstra's algorithm is:
+    //https://www.youtube.com/watch?v=09_LlHjoEiY&ab_channel=freeCodeCamp.org
     class Program
     {
         static void Main(string[] args)
@@ -20,7 +22,10 @@ namespace Route_City
                     {0,0,0,0,0,0,8,9,7,0}
             };
 
-            Stop.dijkstra(graph,9);
+            string a = "b", c = "g";
+            Route_City.RuteCity.FindShortestPath(graph,a,c);
+
+
             Console.Read();
 		}
         // Driver Code

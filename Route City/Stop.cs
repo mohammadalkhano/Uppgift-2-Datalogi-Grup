@@ -106,18 +106,20 @@ namespace Route_City
                     // from src to v through u is smaller
                     // than current value of dist[v]
                     if (!sptSet[v] && graph[u, v] != 0 &&
-                        shortestPaht[u] != int.MaxValue && shortestPaht[u] + graph[u, v] < shortestPaht[v])
+                        shortestPaht[u] != int.MaxValue && 
+                        shortestPaht[u] + graph[u, v] < shortestPaht[v])
                         shortestPaht[v] = shortestPaht[u] + graph[u, v];
             }
 
             // print the constructed distance array
             printShortestPath(shortestPaht, vertices);
         }
+       
 
 
     }
 
-    // This code is contributed by ChitraNayal
+    
 
 
 }

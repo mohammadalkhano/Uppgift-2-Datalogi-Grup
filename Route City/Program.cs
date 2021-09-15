@@ -5,11 +5,11 @@ namespace Route_City
     //The used source to represent the data and implement Dijkstra's algorithm is:
     //https://www.youtube.com/watch?v=09_LlHjoEiY&ab_channel=freeCodeCamp.org
     class Program
-    {
+        {
         static void Main(string[] args)
         {
             int[,] graph =
-            {
+                {
                     {0,4,7,0,7,0,0,0,0,0 },
                     {4,0,3,12,0,0,0,5,0,0},
                     {7,3,0,0,0,0,4,0,12,0},
@@ -32,7 +32,7 @@ namespace Route_City
         //public static void Main1()
         //{
         //    /* Let us create the example
-	       // graph discussed above */
+        // graph discussed above */
         //    int[,] graph = new int[,] { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
         //                            { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
         //                            { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
@@ -45,5 +45,5 @@ namespace Route_City
         //    GFG t = new GFG();
         //    t.dijkstra(graph, 0);
         //}
+        }
     }
-}

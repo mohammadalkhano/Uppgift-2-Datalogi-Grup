@@ -13,17 +13,20 @@ namespace Route_City
 
 
         static List<Node> nodes = new List<Node>();
+        //static List<List<Node>> shortestPath = new List<List<Node>>();
         static List<Node> shortestPath = new List<Node>();
 
         static readonly string[] verticesName = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
         //static bool[] visited = new bool[nodesCount];
         /// <summary>
         ///  Initialize all distances as INFINITE and Edges as not visited.
+        ///  Complexity = O(n)
         /// </summary>
         static void InitializeDefulltValue()
         {
-            for (int i = 0; i < nodesCount; i++)
+            for (int i = 0; i < verticesName.Length; i++)
             {
+                //var neighbors = new List<Node>();
                 var node = new Node(verticesName[i], int.MaxValue, false);
                 nodes.Add(node);
             }
@@ -35,77 +38,133 @@ namespace Route_City
         /// <param name="graph"></param>
         /// <param name="startNode"></param>
         /// <param name="endNode"></param>
-        public static void FindShortestPath(int[,] graph, string startNodeName, string endNodename)
+        public static void FindShortestPath(int[,] graph, int startNode, int endNode)
         {
 
             InitializeDefulltValue();
-            //refactoring, Big O notation?           
-            string name = startNodeName.ToUpper();
-            string endNode = endNodename.ToUpper();
+            SetStartNodeValue(startNode);
+
+
+
+
+
             foreach (var node in nodes)
             {
-                //move it to new method there where you take input from the user.
-                if (!string.IsNullOrEmpty(name) && string.Equals(name, node.Name))
+
+                //if (nodes.IndexOf(item) == endNode)
+                //{
+
+                var nodeIndex = MinDistance(nodes);
+
+
+                foreach (var n in nodes)
+                {
+                    if (nodes.IndexOf(n) == nodeIndex)
+                    {
+                        n.Status = true;
+                    }
+                }
+                // Update shortestPath value of the adjacent nodes of the
+                // picked node.
+
+                foreach (var item in nodes)
+                {
+                    var index = nodes.IndexOf(item);
+                    //FindShortestPath(graph,index+1);
+
+
+                    if (!nodes[index].Status && graph[nodeIndex, index] != 0 &&
+                         nodes[nodeIndex].Cost != int.MaxValue &&
+                         nodes[nodeIndex].Cost + graph[nodeIndex, index] < nodes[index].Cost)
+                        nodes[index].Cost = nodes[nodeIndex].Cost + graph[nodeIndex, index];
+
+                    //if (nodes.IndexOf(item) == endNode)
+                    //{
+                    //    break;
+                    //}
+                }
+
+
+                // AddNeighbours(startNode);
+            }
+
+
+            PrintPath();
+
+
+        }
+
+        private static void AddNeighbours(int crenntNode)
+        {
+            var neighbors = new List<Node>();
+
+            foreach (var node in nodes)
+            {
+                if (node.Cost != int.MaxValue && node.Cost != 0)
+                {
+                    shortestPath[crenntNode].Neighbours.Add(node);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets the start node to zero and marke it as visited.
+        /// Complexity = O(n)
+        /// </summary>
+        /// <param name="startNode"></param>
+        static void SetStartNodeValue(int startNode)
+        {
+            foreach (var node in nodes)
+            {
+
+                var nodeIndex = nodes.IndexOf(node);
+                if (nodeIndex == startNode)
                 {
                     node.Cost = 0;
+                    node.Status = true;
                     shortestPath.Add(node);
+                    break;
                 }
 
             }
-
-
-
-            foreach (var item in nodes)
-            {
-                while (!string.Equals(item.Name, endNode))
-                {
-
-                    var nodeIndex = minDistanc(nodes);
-
-                    // Update shortestPath value of the adjacent nodes of the
-                    // picked node.
-
-                    for (int nodeCount = 0; nodeCount < nodes.Count; nodeCount++)
-                
-                        if (!nodes[nodeCount].Mode && graph[nodeIndex, nodeCount] != 0 &&
-                             shortestPath[nodeIndex].Cost != int.MaxValue &&
-                             shortestPath[nodeIndex].Cost + graph[nodeIndex, nodeCount] < shortestPath[nodeCount].Cost)
-                            shortestPath[nodeCount].Cost = shortestPath[nodeIndex].Cost + graph[nodeIndex, nodeCount];
-                }
-                foreach (var node in shortestPath)
-                {
-                    Console.Write(node.Name + " \t\t " + node.Cost + "\n");
-                }
-
-            }
-
-
         }
         /// <summary>
         /// Finds min distance
         /// </summary>
         /// <param name="nodes"></param>
         /// <returns></returns>
-        static int minDistanc(List<Node> nodes)
+        static int MinDistance(List<Node> nodes)
         {
-            // Initialize min value
+
             int min = int.MaxValue;
             int min_index = -1;
 
             foreach (var node in nodes)
             {
-                if (node.Mode == false && node.Cost <= min)
+                if (node.Status != true && node.Cost <= min)
                 {
                     min = node.Cost;
-                    min_index = nodes.IndexOf(node);
 
+
+                }
+                else
+                {
+                    min_index = nodes.IndexOf(node);
+                    //node.Status = true;
+                    break;
                 }
 
             }
 
             return min_index;
         }
-
+        static void PrintPath()
+        {
+            foreach (var node in nodes)
+            {
+                Console.Write(node.Name + " \t\t " + node.Cost + "\n");
+            }
+        }
     }
 }
 

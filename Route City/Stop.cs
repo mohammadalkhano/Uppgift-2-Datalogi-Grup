@@ -8,17 +8,7 @@ namespace Route_City
 {
     public class Stop
     {
-        static void InitializeDefulltValue()
-        {
-            // Initialize all distances as
-            // INFINITE and stpSet[] as false
-            for (int i = 0; i < vertices; i++)
-            {
-                shortestPaht[i] = int.MaxValue;
-                sptSet[i] = false;
-            }
-        }
-
+        static int vertices = 10;
         static char[] verticesName = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
         int[,] adjecencyMatrix =
             {
@@ -35,14 +25,9 @@ namespace Route_City
             };
 
         // The output array. dist[i] will hold the shortest distance from src to i
-
-
-        // Number of vertices
-
-
-        //static int vertices = 10;
+               
         //static int vertices = Convert.ToChar(Console.ReadLine());
-        static int vertices = int.Parse(Console.ReadLine());
+        //static int vertices = int.Parse(Console.ReadLine());
         //char vertices = Convert.ToChar(vertices_int);
 
         static int[] shortestPaht = new int[vertices];
@@ -52,7 +37,16 @@ namespace Route_City
         // src to i is finalized
         static bool[] sptSet = new bool[vertices];
 
-
+        static void InitializeDefulltValue()
+        {
+            // Initialize all distances as
+            // INFINITE and stpSet[] as false
+            for (int i = 0; i < vertices; i++)
+            {
+                shortestPaht[i] = int.MaxValue;
+                sptSet[i] = false;
+            }
+        }        
 
         static int minDistance(int[] dist, bool[] sptSet)
         {
@@ -60,7 +54,7 @@ namespace Route_City
             int min = int.MaxValue;
             int min_index = -1;
 
-            for (int i = 0; i < vertices; i++)
+            for (int i = 0; i < dist.Length; i++)
                 if (sptSet[i] == false && dist[i] <= min)
                 {
                     min = dist[i];
@@ -72,12 +66,6 @@ namespace Route_City
 
         // A utility function to print
         // the constructed distance array
-        static void printShortestPath(int[] dist, int n)
-        {
-            Console.Write("Stops	 Distance from "+ vertices +" to  A\n");
-            for (int i = 0; i < vertices; i++)
-                Console.Write(verticesName[i] + " \t\t " + dist[i] + "\n");
-        }
 
         // Function that implements Dijkstra's
         // single source shortest path algorithm
@@ -92,7 +80,7 @@ namespace Route_City
             shortestPaht[src] = 0;
 
             // Find shortest path for all vertices
-            for (int count = 0; count < vertices - 1; count++)
+            for (int count = 0; count < vertices; count++)
             {
                 // Pick the minimum distance vertex
                 // from the set of vertices not yet
@@ -119,14 +107,15 @@ namespace Route_City
             }
 
             // print the constructed distance array
-            printShortestPath(shortestPaht, vertices);
+            printShortestPath(shortestPaht);
         }
-       
-
+        static void printShortestPath(int[] dist)
+        {
+            Console.Write("Stops	 Distance from    H  to  A\n");
+            for (int i = 0; i <= vertices-1; i++)
+                Console.Write(verticesName[i] + " \t\t " + dist[i] + "\n");
+        }
 
     }
-
-    
-
 
 }

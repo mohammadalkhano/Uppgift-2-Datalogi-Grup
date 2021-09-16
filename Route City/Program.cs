@@ -22,8 +22,10 @@ namespace Route_City
                     {0,0,0,0,0,0,8,9,7,0}
             };
 
-            string a = "b", c = "g";
-            Route_City.RuteCity.FindShortestPath(graph,a,c);
+            int a = 2, c = 5;
+            Route_City.RuteCity.FindShortestPath(graph,0,2);
+            Console.WriteLine("\t\t\t stop class \t\t\t");
+            //Stop.dijkstra(graph,0);
 
 
             Console.Read();

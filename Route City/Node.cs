@@ -16,16 +16,19 @@ namespace Route_City
         {
             Name = name;
         }
+        
         public Node(string name, int cost, bool mode)
         {
             this.Name = name;
             this.Cost = cost;
-            this.Mode = mode;
+            this.Status = mode;
+            
         }
-        
-        public  string Name { get; set; }
-        public  int Cost { get; set; }
-        public bool Mode { get;set; }
+
+        public string Name { get; set; }
+        public int Cost { get; set; }
+        public bool Status { get; set; }
+        public List<Node> Neighbours { get; set; }
 
     }
 }

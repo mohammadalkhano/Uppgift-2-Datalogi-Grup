@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,9 @@ namespace Route_City
         static List<Node> nodes = new List<Node>();
         //static List<List<Node>> shortestPath = new List<List<Node>>();
         static List<Node> shortestPath = new List<Node>();
+        static Stack myStack = new Stack();
+
+
 
         static readonly string[] verticesName = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
         //static bool[] visited = new bool[nodesCount];
@@ -38,59 +42,48 @@ namespace Route_City
         /// <param name="graph"></param>
         /// <param name="startNode"></param>
         /// <param name="endNode"></param>
-        public static void FindShortestPath(int[,] graph, int startNode, int endNode)
+        public static void Dijkstra(int[,] graph, int startNode, int endNode)
         {
 
             InitializeDefulltValue();
             SetStartNodeValue(startNode);
 
 
-
-
-
             foreach (var node in nodes)
             {
 
-                //if (nodes.IndexOf(item) == endNode)
-                //{
-
                 var nodeIndex = MinDistance(nodes);
 
-
-                foreach (var n in nodes)
+                if (nodes.IndexOf(node) == nodeIndex)
                 {
-                    if (nodes.IndexOf(n) == nodeIndex)
-                    {
-                        n.Status = true;
-                    }
+                    node.Status = true;
+
                 }
+
                 // Update shortestPath value of the adjacent nodes of the
                 // picked node.
-
-                foreach (var item in nodes)
+                for (nodeIndex = 0; nodeIndex < nodes.Count; nodeIndex++)
                 {
-                    var index = nodes.IndexOf(item);
-                    //FindShortestPath(graph,index+1);
+
+                    foreach (var item in nodes)
+                    {
+                        var index = nodes.IndexOf(item);
+                        //FindShortestPath(graph,index+1);
 
 
-                    if (!nodes[index].Status && graph[nodeIndex, index] != 0 &&
-                         nodes[nodeIndex].Cost != int.MaxValue &&
-                         nodes[nodeIndex].Cost + graph[nodeIndex, index] < nodes[index].Cost)
-                        nodes[index].Cost = nodes[nodeIndex].Cost + graph[nodeIndex, index];
+                        if (!nodes[index].Status && graph[nodeIndex, index] != 0 &&
+                             nodes[nodeIndex].Cost != int.MaxValue &&
+                             nodes[nodeIndex].Cost + graph[nodeIndex, index] < nodes[index].Cost)
+                            nodes[index].Cost = nodes[nodeIndex].Cost + graph[nodeIndex, index];
 
-                    //if (nodes.IndexOf(item) == endNode)
-                    //{
-                    //    break;
-                    //}
+                    }
+
                 }
 
-
-                // AddNeighbours(startNode);
             }
 
 
             PrintPath();
-
 
         }
 
@@ -122,7 +115,8 @@ namespace Route_City
                 {
                     node.Cost = 0;
                     node.Status = true;
-                    shortestPath.Add(node);
+                    //shortestPath.Add(node);
+                    //myStack.Push(node);
                     break;
                 }
 

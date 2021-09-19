@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace Route_City
     {
-    class inputControllar
+    /// <summary>
+    /// Receive the inputs.
+    /// Made by Zia.
+    /// </summary>
+    class InputControllar
         {
-        private static void bussLogo()              //Logo till programet 
+        /// <summary>
+        /// Bus logo.
+        /// Made by Zia.
+        /// </summary>
+        private static void bussLogo()
             {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\t\t  ____________________________________________________________ ");
@@ -25,8 +33,28 @@ namespace Route_City
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("<<<=============================================================================================<<<");
             }
-        
-        public static void chooseStations()     // meny för att välja hållplatser
+        /// <summary>
+        /// To find the distance between stops.
+        /// Made by Mohammad and Zia.
+        /// </summary>
+        static int[,] graph =
+               {
+                    {0,4,7,0,7,0,0,0,0,0 },
+                    {4,0,3,12,0,0,0,5,0,0},
+                    {7,3,0,0,0,0,4,0,12,0},
+                    {0,12,0,0,0,0,0,7,3,0},
+                    {7,0,0,0,0,3,5,0,0,0 },
+                    {0,0, 0,0,3,0,5,0,0,0},
+                    {0,0,4,0,5,5,0,8,13,8},
+                    {0,5,0,7,0,0,8,0,0,9},
+                    {0,0,12,3,0,0,13,0,0,7},
+                    {0,0,0,0,0,0,8,9,7,0}
+            };
+        /// <summary>
+        /// Menu to choos the stations.
+        /// Made by Zia.
+        /// </summary>
+        public static void chooseStations()
             {
             bussLogo();
             Console.WriteLine("Mata in ett nummer mellan [0]-[9] som motsvarar hållplatsen du vill åka till:" +
@@ -36,27 +64,33 @@ namespace Route_City
             int start = intControllar(9,0);
             Console.Write("Till hållplats : ");
             int end = intControllar(9,0);
-
-            Route_City.RuteCity.Dijkstra(Program.graph(),start,end);        //Räknar ut vägen från start till end.
             Console.WriteLine();
-            omStar();
+            Route_City.RuteCity.Dijkstra(graph,start,end);
+            //Calculates the path from start to end.
+            Console.WriteLine();
+            startAgain();
             }
-        private static void omStar()                    // meny för att kuna välja att stänga eller starta om programmet
-            {                                           //och en rekrusiva metod som anropar sig själv.
+        /// <summary>
+        /// Menu to start again and to close the program.
+        /// Made by Zia.
+        /// </summary>
+        public static void startAgain()
+            {
             Console.WriteLine("[O]För starta om \n[S]För stänga ner");
             var userInput = Console.ReadLine().ToLower();
-           
-            if (userInput != "o" && userInput != "s")               // Kollar om input är inte (s) och (o) 
+
+            if (userInput != "o" && userInput != "s")
+            // Check if input is not (s) and (o). 
                 {
                 Console.Clear();
                 bussLogo();
-                Console.WriteLine("Fel input försök igen");   
-                omStar();
+                Console.WriteLine("Fel input försök igen");
+                startAgain();
                 }
             else if (userInput == "o")
                 {
                 Console.Clear();
-                inputControllar.chooseStations();
+                chooseStations();
                 }
             else if (userInput == "s")
                 {
@@ -64,12 +98,20 @@ namespace Route_City
                 System.Environment.Exit(0);
                 }
             }
-        public static int intControllar(int maxValue, int minValue)         // metoden contrullerar inputen 
+        /// <summary>
+        /// controls the int inputs.
+        /// Made by Zia.
+        /// </summary>
+        /// <param name="maxValue">the maxvalue</param>
+        /// <param name="minValue">the minvalue</param>
+        /// <returns></returns>
+        public static int intControllar(int maxValue,int minValue)
             {
-            int check;                                                      //Kolla om input och input har maxValue och minValue.
-            while (!Int32.TryParse(Console.ReadLine(),out check)|| check > maxValue || check < minValue) 
-                {                                                           
-                Console.WriteLine("Du har skrivt ett fel input försök igen.");  //skickar in ett medalande.
+            int check;
+            while (!Int32.TryParse(Console.ReadLine(),out check) || check > maxValue || check < minValue)
+            //Check if the input does not have the same maxValue and minValue or if it is not a int then send a message.
+                {
+                Console.WriteLine("Du har skrivt ett fel input försök igen.");
                 }
             return check;
             }

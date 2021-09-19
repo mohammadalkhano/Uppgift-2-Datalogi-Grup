@@ -9,19 +9,10 @@ namespace Route_City
 {
     public class RuteCity
     {
-        static int nodesCount = 10;
-
-
-
-        static List<Node> nodes = new List<Node>();
-        //static List<List<Node>> shortestPath = new List<List<Node>>();
+        static List<Node> nodes = new List<Node>();        
         static List<Node> shortestPath = new List<Node>();
-        static Stack myStack = new Stack();
-
-
-
         static readonly string[] verticesName = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
-        //static bool[] visited = new bool[nodesCount];
+        
         /// <summary>
         ///  Initialize all distances as INFINITE and Edges as not visited.
         ///  Complexity = O(n)
@@ -38,38 +29,32 @@ namespace Route_City
 
         /// <summary>
         /// Finds the shortest path.
+        /// Created by Mohammad.
         /// </summary>
         /// <param name="graph"></param>
         /// <param name="startNode"></param>
-        /// <param name="endNode"></param>
-        public static void Dijkstra(int[,] graph, int startNode, int endNode)
+        public static void Dijkstra(int[,] graph, int startNode)
         {
 
             InitializeDefulltValue();
             SetStartNodeValue(startNode);
-
-
             foreach (var node in nodes)
             {
 
                 var nodeIndex = MinDistance(nodes);
-
                 if (nodes.IndexOf(node) == nodeIndex)
                 {
                     node.Status = true;
 
                 }
 
-                // Update shortestPath value of the adjacent nodes of the
-                // picked node.
+                
                 for (nodeIndex = 0; nodeIndex < nodes.Count; nodeIndex++)
                 {
-
+                    //Updats the Cost of current node
                     foreach (var item in nodes)
                     {
                         var index = nodes.IndexOf(item);
-                        //FindShortestPath(graph,index+1);
-
 
                         if (!nodes[index].Status && graph[nodeIndex, index] != 0 &&
                              nodes[nodeIndex].Cost != int.MaxValue &&
@@ -81,28 +66,14 @@ namespace Route_City
                 }
 
             }
-
-
             PrintPath();
 
-        }
-
-        private static void AddNeighbours(int crenntNode)
-        {
-            var neighbors = new List<Node>();
-
-            foreach (var node in nodes)
-            {
-                if (node.Cost != int.MaxValue && node.Cost != 0)
-                {
-                    shortestPath[crenntNode].Neighbours.Add(node);
-                }
-            }
         }
 
         /// <summary>
         /// Sets the start node to zero and marke it as visited.
         /// Complexity = O(n)
+        /// Created by Mohammad.
         /// </summary>
         /// <param name="startNode"></param>
         static void SetStartNodeValue(int startNode)
@@ -114,9 +85,6 @@ namespace Route_City
                 if (nodeIndex == startNode)
                 {
                     node.Cost = 0;
-                    node.Status = true;
-                    //shortestPath.Add(node);
-                    //myStack.Push(node);
                     break;
                 }
 
@@ -124,6 +92,7 @@ namespace Route_City
         }
         /// <summary>
         /// Finds min distance
+        /// Created by Mohammad.
         /// </summary>
         /// <param name="nodes"></param>
         /// <returns></returns>
@@ -152,6 +121,10 @@ namespace Route_City
 
             return min_index;
         }
+        /// <summary>
+        /// Prints The paths
+        /// Created by Mohammad.
+        /// </summary>
         static void PrintPath()
         {
             foreach (var node in nodes)
@@ -161,28 +134,3 @@ namespace Route_City
         }
     }
 }
-
-
-
-//DIJKSTRA(Graf G, startnod s)
-//       // Vi initierar alla noder i grafen.
-//       // Billigaste vägen (avståndet) är oändligt
-//       // och föregående nod är odefinierad.
-//för i ∈ Noder(G) gör
-//           avstånd[i] = OÄNDLIGT
-//           föregångare[i] = NULL
-//       // Avståndet till startnoden är 0.
-//       avstånd[s] = 0
-//       // Markera startnoden som avsökt.
-//       Avsökt(s)
-//       medan inte alla noder avsökta gör
-//           // Finn den ej avsökta nod som har lägst nodpris
-//           // tills alla är avsökta.
-//           i = Minimum( ej avsökta noder )
-//           för j ∈ närliggande(i) gör
-//               // Undersök om det finns en billigare väg
-//               // via nod i till närliggande noder.
-//               om avstånd[j] > avstånd[i] + kostnad(i, j) gör
-//                   avstånd[j] = avstånd[i] + kostnad(i, j)
-//                   föregångare[j] = i
-//           Avsökt(i)

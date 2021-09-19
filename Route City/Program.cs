@@ -2,8 +2,10 @@
 
 namespace Route_City
 {
+    //Mohammads sources:
     //The used source to represent the data and implement Dijkstra's algorithm is:
-    //https://www.youtube.com/watch?v=09_LlHjoEiY&ab_channel=freeCodeCamp.org
+    //https://www.youtube.com/watch?v=09_LlHjoEiY&ab_channel=freeCodeCamp.org +
+    //book: C# Data Structures and Algorithms, Marcin Jamro, ISBN: 9781788833738
     class Program
     {
         static void Main(string[] args)
@@ -22,8 +24,8 @@ namespace Route_City
                     {0,0,0,0,0,0,8,9,7,0}
             };
 
-            int c = 5;
-            Route_City.RuteCity.Dijkstra(graph, c, 2);
+            int c = 0;
+            Route_City.RuteCity.Dijkstra(graph, c);
             Console.Read();
         }
 

@@ -8,7 +8,7 @@ namespace Route_City
     {
     class inputControllar
         {
-        private static void bussLogo()
+        private static void bussLogo()              //Logo till programet 
             {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\t\t  ____________________________________________________________ ");
@@ -25,54 +25,54 @@ namespace Route_City
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("<<<=============================================================================================<<<");
             }
-        public static void buss()
+        
+        public static void chooseStations()     // meny för att välja hållplatser
             {
             bussLogo();
-            var loop = true;
-            while (loop)
-                {
-                Console.WriteLine("För att stänga ner programmet [S]");
-                Console.WriteLine("För att går vidare [V]");
+            Console.WriteLine("Mata in ett nummer mellan [0]-[9] som motsvarar hållplatsen du vill åka till:" +
+                "\n\n[0] A\t [1] B\t [2] C\t [3] D\t [4] E\t [5] F\t [6] G\t [7] H\t [8] I\t [9] J\n");
 
-                var userInput = Console.ReadLine().ToLower();
-                if (userInput == "s")
-                    {
-                    loop = false;
-                    }
-                else if (userInput == "v")
-                    {
-                    chooseStations();
-                    }
-                else
-                    {
-                    Console.WriteLine("fel input försök igen");
-                    }
+            Console.Write("Från hållplats : ");
+            int start = intControllar(9,0);
+            Console.Write("Till hållplats : ");
+            int end = intControllar(9,0);
+
+            Route_City.RuteCity.Dijkstra(Program.graph(),start,end);        //Räknar ut vägen från start till end.
+            Console.WriteLine();
+            omStar();
+            }
+        private static void omStar()                    // meny för att kuna välja att stänga eller starta om programmet
+            {                                           //och en rekrusiva metod som anropar sig själv.
+            Console.WriteLine("[O]För starta om \n[S]För stänga ner");
+            var userInput = Console.ReadLine().ToLower();
+           
+            if (userInput != "o" && userInput != "s")               // Kollar om input är inte (s) och (o) 
+                {
+                Console.Clear();
+                bussLogo();
+                Console.WriteLine("Fel input försök igen");   
+                omStar();
+                }
+            else if (userInput == "o")
+                {
+                Console.Clear();
+                inputControllar.chooseStations();
+                }
+            else if (userInput == "s")
+                {
+                Console.WriteLine("Välkommen Åter");
+                System.Environment.Exit(0);
                 }
             }
-        private static void chooseStations()
+        public static int intControllar(int maxValue, int minValue)         // metoden contrullerar inputen 
             {
-            Console.WriteLine("Hållplatser som bussen kör till\n A\t B\t C\t D\t E\t F\t G\t H\t I\t J\n ");
-            Console.Write("Från hållplats : ");
-            var start = Console.ReadLine().ToLower();
-            Console.Write("Till hållplats : ");
-            var end = Console.ReadLine().ToLower();
+            int check;                                                      //Kolla om input och input har maxValue och minValue.
+            while (!Int32.TryParse(Console.ReadLine(),out check)|| check > maxValue || check < minValue) 
+                {                                                           
+                Console.WriteLine("Du har skrivt ett fel input försök igen.");  //skickar in ett medalande.
+                }
+            return check;
             }
         }
     }
-
-
-/*
-
-public static char inputControllar()
-    {
-    char check;
-    while (!char[](Console.ReadLine(),out check))             //Kolla om input är inte int så-
-        {                                                           //skicka ett medalande att talet är inte int.
-        Console.Clear();
-        Console.WriteLine("Du har skrivt ett fel input försök igen.");
-        }
-    return check;
-    }
-}
-*/
 

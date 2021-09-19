@@ -1,13 +1,17 @@
 ﻿using System;
 
 namespace Route_City
-{
+    {
     //The used source to represent the data and implement Dijkstra's algorithm is:
     //https://www.youtube.com/watch?v=09_LlHjoEiY&ab_channel=freeCodeCamp.org
     class Program
-    {
-        static void Main(string[] args)
         {
+        static void Main(string[] args)
+            {
+            inputControllar.chooseStations();
+            }
+        public static int[,] graph()
+            {
             int[,] graph =
                 {
                     {0,4,7,0,7,0,0,0,0,0 },
@@ -21,11 +25,7 @@ namespace Route_City
                     {0,0,12,3,0,0,13,0,0,7},
                     {0,0,0,0,0,0,8,9,7,0}
             };
-
-            int c = 5;
-            Route_City.RuteCity.Dijkstra(graph, c, 2);
-            Console.Read();
+            return graph;
+            }
         }
-
     }
-}
